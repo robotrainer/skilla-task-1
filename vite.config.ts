@@ -1,12 +1,12 @@
 /// <reference types="vite/client" />
 import path from "path";
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
+  // const env = loadEnv(mode, process.cwd(), "");
 
   const isBuild = mode === "main" || mode === "develop";
 
@@ -26,12 +26,12 @@ export default defineConfig(({ mode }) => {
     },
     preview: {
       port: 5000,
-      proxy: {
-        "/api/v1": {
-          target: env.VITE_PROXY_TARGET || "http://localhost:8080",
-          changeOrigin: true,
-        },
-      },
+      // proxy: {
+      //   "/api/v1": {
+      //     target: env.VITE_PROXY_TARGET || "http://localhost:8080",
+      //     changeOrigin: true,
+      //   },
+      // },
     },
     plugins: [
       react(),
@@ -51,11 +51,6 @@ export default defineConfig(({ mode }) => {
       modules: {
         localsConvention: "camelCaseOnly",
       },
-      preprocessorOptions: {
-        scss: {
-          api: "modern-compiler",
-        },
-      },
     },
     esbuild: {
       pure: isBuild ? ["console.log"] : [],
@@ -66,10 +61,8 @@ export default defineConfig(({ mode }) => {
       assetsInlineLimit: 0,
       rollupOptions: {
         output: {
-          manualChunks: (id) => {
-            if (id.includes("node_modules")) {
-              return "vendor";
-            }
+          manualChunks: {
+            react: ["react", "react-dom"]
           },
         },
       },
