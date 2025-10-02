@@ -1,0 +1,26 @@
+:root {
+  --blue: #005ff8;
+  --secondary-blue: #122945;
+  --trinity-blue: #adbfdf;
+  --quadruple-blue: #d8e4fb;
+  --red: #ea1a4f;
+  --light-red: #fee9ef;
+  --green: #28a879;
+  --secondary-green: #00a775;
+  --light-green: #dbf8ef;
+  --accent: #002cfb;
+  --gray: #899cb1;
+  --secondary-gray: #f1f4f9;
+  --trinity-gray: #5e7793;
+  --quadruple-gray: #eaf0fa;
+  --white: #ffffff;
+
+  --shadow: 0px 4px 5px 0px #e9edf3;
+
+  --text: var(--secondary-blue);
+  --secondary-text: var(--gray);
+  --trinity-text: var(--trinity-gray);
+
+  --background: var(--secondary-gray);
+  --background-card: var(--white);
+}
