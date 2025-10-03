@@ -81,6 +81,7 @@ export default defineConfig(({ mode }) => {
         shared: path.resolve(__dirname, "./src/components/shared"),
         widgets: path.resolve(__dirname, "./src/components/widgets"),
         types: path.resolve(__dirname, "./src/types"),
+        api: path.resolve(__dirname, "./src/api"),
       },
     },
   };
