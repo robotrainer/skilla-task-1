@@ -2,6 +2,7 @@ export type TSvgSize = "small" | "medium" | "large";
 
 export interface ISvgProps {
   color: string;
-  size?: TSvgSize;
+  width?: number;
+  height?: number;
   rotate?: number;
 }

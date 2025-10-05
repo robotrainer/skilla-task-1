@@ -1,13 +1,5 @@
 import { HOSTS } from "consts";
 
-export interface IErrorResponse {
-  status: number;
-  statusText: string;
-  url: string;
-  message: string;
-  data?: unknown;
-}
-
 class FetchError extends Error {
   constructor(
     message: string,
@@ -48,7 +40,7 @@ export async function baseFetch<T = unknown>(path: string, options: IBaseFetch =
       query = null,
       method = "GET",
       body,
-      host = HOSTS.mainService,
+      host = HOSTS.mainService, // TODO вынести из функции
       ...extraOpts
     } = options;
 
@@ -56,7 +48,7 @@ export async function baseFetch<T = unknown>(path: string, options: IBaseFetch =
 
     requiredHost(host);
 
-    const token = import.meta.env.VITE_TOKEN;
+    const token = import.meta.env.VITE_TOKEN; // TODO вынести из функции
 
     const reqOptions: RequestInit = {
       method,
@@ -79,7 +71,6 @@ export async function baseFetch<T = unknown>(path: string, options: IBaseFetch =
         {}
       );
 
-      console.log(queryWithoutUndefinedValue);
       queryString = new URLSearchParams(queryWithoutUndefinedValue).toString();
       queryString = queryString && `?${queryString}`;
     }

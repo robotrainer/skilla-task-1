@@ -1,31 +1,48 @@
-import { getList, type ICall, type IErrorResponse } from "api";
-import { useEffect, useState } from "react";
+import { getList } from "api";
+import { useCallback, useEffect, useState } from "react";
 
-// import { Icons, ArrowSVG } from "shared";
+import { DATE_RANGE } from "consts";
+import { changeFormatStringDate, getDateFromRange, getDateString } from "utils";
+
+import { Header } from "./Header";
+import { Table } from "./Table";
 
 import classes from "./Calls.module.scss";
+
+import type { ICall, IErrorResponse } from "types";
 
 export const Calls = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [calls, setCalls] = useState<ICall[]>([]);
+  const [now] = useState(new Date());
+  const [dateStartState, setDateStartState] = useState<string>(
+    changeFormatStringDate(getDateString(getDateFromRange(now, DATE_RANGE[0].range)))
+  );
+  const [dateEndState, setDateEndState] = useState<string>(
+    changeFormatStringDate(getDateString(now))
+  );
+
+  const changeDateRange = useCallback((dateStart: Date, dateEnd?: Date) => {
+    setDateEndState((prevDateEnd) =>
+      dateEnd ? changeFormatStringDate(getDateString(dateEnd)) : prevDateEnd
+    );
+    setDateStartState(changeFormatStringDate(getDateString(dateStart)));
+  }, []);
 
   useEffect(() => {
-    getList({ date_start: "2025-09-01", date_end: "2025-10-03" })
+    getList({ date_start: dateStartState, date_end: dateEndState })
       .then((resp) => setCalls(resp.results))
       .catch((error: IErrorResponse) => console.error(error.message, error.url))
       .finally(() => setIsLoading(false));
-  }, []);
-
-  console.log("calls", calls);
+  }, [dateStartState, dateEndState]);
 
   return (
     <div className={classes.calls}>
-      <div className={classes.callsHeader}>{"Calls"}</div>
-      {/* <Icons svg={<ArrowSVG color="var(--green)" rotate={180} />} /> */}
-      <div className={classes.callsTableWrapper}>
-        <div className={classes.callsTableInner}>
-          {isLoading ? <span>Loading...</span> : <div className={classes.callsTable} />}
-        </div>
+      <Header changeDateRange={changeDateRange} now={now} />
+      <div className={classes.tableWrapper}>
+        {/* <div className={classes.tableInner}> */}
+        {isLoading ? <span>Loading...</span> : <Table data={calls} />}
+        {/* </div> */}
       </div>
     </div>
   );

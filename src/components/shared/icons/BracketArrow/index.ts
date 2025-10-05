@@ -1,0 +1,1 @@
+export { BracketArrowSVG } from "./BracketArrow";

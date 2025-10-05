@@ -1,34 +1,101 @@
-$prefix: "calls";
+@mixin button {
+  &:hover {
+    svg {
+      path {
+        fill: var(--accent);
+      }
+    }
+  }
+}
 
-.#{$prefix} {
+.calls {
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 1400px;
   row-gap: 16px;
 
-  .#{$prefix}-header {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 24px;
-  }
+    width: 100%;
 
-  .#{$prefix}-table-wrapper {
-    min-width: min-content;
-    height: calc(100vh - 2 * 80px - 24px - 16px);
-    background-color: var(--background-card);
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-
-    .#{$prefix}-table-inner {
+    .select-in-out {
       display: flex;
-      overflow-y: auto;
-      height: inherit;
-      min-width: min-content;
+      column-gap: 4px;
 
-      .#{$prefix}-table {
-        // width: 1440px;
-        flex-grow: 1;
-        min-width: 1400px;
-        height: 1900px;
+      .title {
+        width: 57px;
+        color: var(--trinity-text);
       }
     }
+
+    .select-date {
+      position: relative;
+      display: flex;
+      align-items: center;
+      column-gap: 12px;
+
+      .previous,
+      .next {
+        height: 24px;
+
+        @include button();
+      }
+
+      .select {
+        display: flex;
+        align-items: center;
+
+        @include button();
+
+        .title {
+          margin-left: 8px;
+          color: var(--accent);
+        }
+      }
+
+      .select-date-menu {
+        position: absolute;
+        top: 24px;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--quadruple-gray);
+        border-radius: 4px;
+        box-shadow: var(--shadow);
+        background-color: var(--background-card);
+        z-index: 100;
+        visibility: hidden;
+
+        .range-button {
+          height: 40px;
+          width: 200px;
+          padding: 6px 20px;
+          text-align: left;
+
+          &.active {
+            color: var(--accent);
+          }
+
+          &:hover {
+            background-color: var(--secondary-hover);
+          }
+        }
+
+        &.is-show {
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  .table-wrapper {
+    height: calc(100vh - 2 * 80px - 24px - 16px);
+    border-radius: 8px;
+    background-color: var(--background-card);
+    box-shadow: var(--shadow);
+    overflow: auto;
   }
 }

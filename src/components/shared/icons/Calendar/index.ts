@@ -1,0 +1,1 @@
+export { CalendarSVG } from "./Calendar";
