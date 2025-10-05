@@ -1,5 +1,7 @@
 import type { PropsWithChildren } from "react";
 
+import { classNames } from "utils";
+
 import classes from "./StatusCard.module.scss";
 
 interface IStatusCarProps {
@@ -16,7 +18,7 @@ export const StatusCard = ({
 }: PropsWithChildren<IStatusCarProps>) => {
   return (
     <div style={{ backgroundColor, borderColor }} className={classes.statusCard}>
-      <span style={{ color: textColor }} className={classes.title}>
+      <span style={{ color: textColor }} className={classNames("text-caption", classes.title)}>
         {children}
       </span>
     </div>

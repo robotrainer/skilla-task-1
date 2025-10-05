@@ -91,7 +91,7 @@ export const Table = ({ data }: ITableProps) => {
                   ? "great"
                   : null;
 
-          const callDuration = `${Math.floor(call.time / 60)}:${call.time % 60}`;
+          const callDuration = call.time ? `${Math.floor(call.time / 60)}:${call.time % 60}` : "";
 
           return (
             <tr key={call.id} className={classes.row}>
