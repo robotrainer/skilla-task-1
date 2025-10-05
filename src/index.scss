@@ -11,6 +11,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: var(--quadruple-gray) rgba(255, 255, 255, 0);
 }
@@ -37,7 +38,6 @@ body {
   min-height: 100vh;
   color: var(--text);
   background-color: var(--background);
-  box-sizing: border-box;
 }
 
 #root {
@@ -49,16 +49,3 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
-// @media (prefers-color-scheme: light) {
-//   :root {
-//     color: #213547;
-//     background-color: #ffffff;
-//   }
-//   a:hover {
-//     color: #747bff;
-//   }
-//   button {
-//     background-color: #f9f9f9;
-//   }
-// }

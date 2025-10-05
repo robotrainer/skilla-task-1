@@ -71,6 +71,16 @@
 
     &:hover {
       background: var(--hover);
+
+      td {
+        &:last-child {
+          .col {
+            .call-audio {
+              visibility: visible;
+            }
+          }
+        }
+      }
     }
 
     td {
@@ -100,8 +110,22 @@
 
       &:last-child {
         .col {
+          position: relative;
           justify-content: end;
           padding-right: 40px;
+          min-height: 65px;
+
+          .call-audio {
+            position: absolute;
+            top: 50%;
+            right: 40px;
+            transform: translate(0, -50%);
+            visibility: hidden;
+
+            &.playing {
+              visibility: visible;
+            }
+          }
         }
       }
     }

@@ -83,6 +83,11 @@ export async function baseFetch<T = unknown>(path: string, options: IBaseFetch =
     const contentType = response.headers.get("content-type");
     if (contentType && contentType.includes("application/json")) {
       data = await response.json();
+    } else if (
+      contentType &&
+      contentType.includes("audio/mpeg, audio/x-mpeg, audio/x-mpeg-3, audio/mpeg3")
+    ) {
+      data = await response.blob();
     } else {
       data = await response.text();
     }

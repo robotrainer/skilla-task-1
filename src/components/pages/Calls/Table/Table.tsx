@@ -4,6 +4,8 @@ import { ArrowSVG, BracketArrowSVG, Button } from "shared";
 import { classNames } from "utils";
 import { StatusCard } from "widgets";
 
+import { AudioPlayer } from "../AudioPlayer";
+
 import classes from "./Table.module.scss";
 
 import type { ICall } from "types";
@@ -36,6 +38,7 @@ const EVALUATION_DATE = {
 export const Table = ({ data }: ITableProps) => {
   const [sortByDate, setSortByDate] = useState(false);
   const [sortByDuration, setSortByDuration] = useState(false);
+  const [playAudioCallId, setPlayAudioCallId] = useState<number | null>(null);
 
   return (
     <table className={classes.table}>
@@ -63,6 +66,7 @@ export const Table = ({ data }: ITableProps) => {
           <th className={classNames("text-caption", classes.evaluationCol)} scope="col">
             Оценка
           </th>
+          <th scope="col"></th>
           <th className={classes.durationCol} scope="col">
             <Button
               className={classes.durationButton}
@@ -86,6 +90,8 @@ export const Table = ({ data }: ITableProps) => {
                 : Math.random() <= 0.75
                   ? "great"
                   : null;
+
+          const callDuration = `${Math.floor(call.time / 60)}:${call.time % 60}`;
 
           return (
             <tr key={call.id} className={classes.row}>
@@ -139,9 +145,25 @@ export const Table = ({ data }: ITableProps) => {
                 </div>
               </td>
               <td>
-                <div
-                  className={classNames("text-body", classes.col)}
-                >{`${Math.floor(call.time / 60)}:${call.time % 60}`}</div>
+                <div className={classes.audioPlayerCol}></div>
+              </td>
+              <td>
+                <div className={classNames("text-body", classes.col)}>
+                  {call.record && (
+                    <AudioPlayer
+                      id={call.id}
+                      className={classNames(
+                        classes.callAudio,
+                        playAudioCallId === call.id && classes.playing
+                      )}
+                      record={call.record}
+                      partnershipId={call.partnership_id}
+                      callDuration={callDuration}
+                      getPlayAudioCallId={(value) => setPlayAudioCallId(value)}
+                    />
+                  )}
+                  <span>{callDuration}</span>
+                </div>
               </td>
             </tr>
           );

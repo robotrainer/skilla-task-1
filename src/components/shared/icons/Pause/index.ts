@@ -1,0 +1,1 @@
+export { PauseSVG } from "./Pause";
