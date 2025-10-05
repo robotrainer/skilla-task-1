@@ -22,13 +22,58 @@
     height: 24px;
     width: 100%;
 
-    .select-in-out {
+    .select-in-out-wrapper {
+      position: relative;
       display: flex;
-      column-gap: 4px;
+      align-items: center;
+      column-gap: 16px;
 
-      .title {
-        width: 57px;
+      .select-in-out {
+        display: flex;
+        column-gap: 4px;
+
+        .title {
+          color: var(--trinity-text);
+        }
+      }
+
+      .reset-button {
+        display: flex;
+        align-items: center;
+        column-gap: 4px;
         color: var(--trinity-text);
+      }
+
+      .select-in-out-menu {
+        position: absolute;
+        top: 24px;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--quadruple-gray);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        background-color: var(--background-card);
+        z-index: 100;
+        visibility: hidden;
+
+        .range-button {
+          height: 40px;
+          width: 200px;
+          padding: 6px 20px;
+          text-align: left;
+
+          &.active {
+            color: var(--accent);
+          }
+
+          &:hover {
+            background-color: var(--secondary-hover);
+          }
+        }
+
+        &.is-show {
+          visibility: visible;
+        }
       }
     }
 

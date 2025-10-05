@@ -5,7 +5,7 @@ export const CalendarSVG = ({ color, width = 24, height = 24, rotate = 0 }: ISvg
     width={width}
     height={height}
     transform={`rotate(${rotate})`}
-    viewBox="0 0 16 18"
+    viewBox={`0 0 ${width} ${height}`}
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >

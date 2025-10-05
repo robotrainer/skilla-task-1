@@ -2,17 +2,15 @@
 @import url(./styles/typography.scss);
 
 :root {
-  font-family: "SF Pro Display", sans-serif;
-
   color-scheme: light dark;
+}
 
+* {
+  font-family: "SF Pro Display", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-* {
   scrollbar-width: thin;
   scrollbar-color: var(--quadruple-gray) rgba(255, 255, 255, 0);
 }

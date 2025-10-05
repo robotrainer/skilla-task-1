@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { ArrowSVG, BracketArrowSVG, Button } from "shared";
 import { classNames } from "utils";
 import { StatusCard } from "widgets";
@@ -5,7 +7,6 @@ import { StatusCard } from "widgets";
 import classes from "./Table.module.scss";
 
 import type { ICall } from "types";
-import { useState } from "react";
 
 interface ITableProps {
   data: ICall[];
@@ -42,11 +43,11 @@ export const Table = ({ data }: ITableProps) => {
         <tr>
           <th scope="col"></th>
           <th className={classNames("text-caption", classes.typeCol)} scope="col">
-            Тип
+            <span className="text-caption">Тип</span>
           </th>
-          <th className={classNames("text-caption", classes.timeCol)} scope="col">
+          <th className={classes.timeCol} scope="col">
             <Button className={classes.timeButton} onClick={() => setSortByDate((prev) => !prev)}>
-              <span>Время</span>
+              <span className="text-caption">Время</span>
               <BracketArrowSVG color="var(--trinity-blue)" rotate={sortByDate ? 0 : 180} />
             </Button>
           </th>
@@ -62,12 +63,12 @@ export const Table = ({ data }: ITableProps) => {
           <th className={classNames("text-caption", classes.evaluationCol)} scope="col">
             Оценка
           </th>
-          <th className={classNames("text-caption", classes.durationCol)} scope="col">
+          <th className={classes.durationCol} scope="col">
             <Button
               className={classes.durationButton}
               onClick={() => setSortByDuration((prev) => !prev)}
             >
-              <span> Длительность</span>
+              <span className="text-caption">Длительность</span>
               <BracketArrowSVG color="var(--trinity-blue)" rotate={sortByDuration ? 0 : 180} />
             </Button>
           </th>

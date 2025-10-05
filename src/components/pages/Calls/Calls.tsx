@@ -21,6 +21,7 @@ export const Calls = () => {
   const [dateEndState, setDateEndState] = useState<string>(
     changeFormatStringDate(getDateString(now))
   );
+  const [inOut, setInOut] = useState<string>();
 
   const changeDateRange = useCallback((dateStart: Date, dateEnd?: Date) => {
     setDateEndState((prevDateEnd) =>
@@ -29,20 +30,22 @@ export const Calls = () => {
     setDateStartState(changeFormatStringDate(getDateString(dateStart)));
   }, []);
 
+  const changeInOut = (valueInOut: string | undefined) => {
+    setInOut(valueInOut);
+  };
+
   useEffect(() => {
-    getList({ date_start: dateStartState, date_end: dateEndState })
+    getList({ date_start: dateStartState, date_end: dateEndState, in_out: inOut })
       .then((resp) => setCalls(resp.results))
       .catch((error: IErrorResponse) => console.error(error.message, error.url))
       .finally(() => setIsLoading(false));
-  }, [dateStartState, dateEndState]);
+  }, [dateStartState, dateEndState, inOut]);
 
   return (
     <div className={classes.calls}>
-      <Header changeDateRange={changeDateRange} now={now} />
+      <Header changeDateRange={changeDateRange} now={now} changeInOut={changeInOut} />
       <div className={classes.tableWrapper}>
-        {/* <div className={classes.tableInner}> */}
         {isLoading ? <span>Loading...</span> : <Table data={calls} />}
-        {/* </div> */}
       </div>
     </div>
   );
